@@ -1,0 +1,45 @@
+como obtengo con un programa en nodejs las siguiente informacion ? computername, fecha , hora Y  usuario ?  
+
+En Node.js puedes obtener esa información usando módulos nativos como os y process, además de Date para fecha y hora.
+
+Ejemplo completo
+const os = require('os');
+
+// Nombre de la computadora
+const computerName = os.hostname();
+
+// Usuario del sistema
+const userName = os.userInfo().username;
+
+// Fecha y hora actual
+const now = new Date();
+const fecha = now.toLocaleDateString();
+const hora = now.toLocaleTimeString();
+
+console.log("Computer Name:", computerName);
+console.log("Usuario:", userName);
+console.log("Fecha:", fecha);
+console.log("Hora:", hora);
+Qué hace cada parte
+
+os.hostname() → obtiene el nombre del equipo
+
+os.userInfo().username → obtiene el usuario del sistema
+
+new Date() → obtiene fecha y hora actuales
+
+toLocaleDateString() → formatea la fecha
+
+toLocaleTimeString() → formatea la hora
+
+Ejemplo de salida
+Computer Name: DESKTOP-9A3F1
+Usuario: juan
+Fecha: 7/3/2026
+Hora: 14:22:10
+
+💡 Tip: Si quieres fecha y hora en formato ISO (YYYY-MM-DD HH:mm:ss):
+
+const now = new Date();
+const fechaHora = now.toISOString().replace('T',' ').substring(0,19);
+console.log(fechaHora);

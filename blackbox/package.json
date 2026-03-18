@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@types/node": "^25.3.5"
+  },
+  "name": "blackbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "undici-types": "^7.18.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

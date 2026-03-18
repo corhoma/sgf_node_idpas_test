@@ -1,0 +1,1 @@
+Este es el programa d etest para certificar conectividad y operatividad de SIgnafile con Active directory
