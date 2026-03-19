@@ -2,8 +2,8 @@
 	* archivo types.ts solo para interfaces:
 	*         
 	* @author  Corhoma srl. (c) 2026 - 
-	* @version 1.02.  2026/03/16
-	* @since   node 20.xxxx
+	* @version 1.02.  2026/03/16 rev. 2026/03/19
+	* @since   node 18.xxxx
     * 
     * 
 	* 
