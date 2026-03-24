@@ -152,7 +152,8 @@ async function main(): Promise<void> {
 let usuario_a_validar: string = "";
 let pass_usuario: string = "";
 
-    const readline = require('readline/promises');
+    //const readline = require('readline/promises');
+    
     const { stdin: input, stdout: output } = require('process');
 
     const rl = readline.createInterface({ input, output });
@@ -192,7 +193,7 @@ let pass_usuario: string = "";
     // ----------------------------------------------
 
      const usr_val_config: LdapConfig = {
-        url: url,
+        url: url, 
         baseDN: datos_ini.BASE_DN,
         bindDN: fq_usuario_a_validar,
         bindPassword: pass_usuario 
@@ -208,17 +209,23 @@ let pass_usuario: string = "";
 
         SalCode = 204  ;
 
-        let msg_log = "\n Error validaddo el usuario " ;
+        let msg_log = "\n Error validando el usuario ... \n" ;
           
         escribir_buf_log ( msg_log, bufferSalidaLog ) ;
 
         grabar_array_to_file_log (bufferSalidaLog, logPath ) ;
 
         console.log ( msg_log );
+          
+       process.exit( SalCode )
+
+
+
+
 
     }else{
 
-        let msg_log = "\n Usuario validado correctamente" ;
+        let msg_log = "\n Usuario validado correctamente \n" ;
           
         escribir_buf_log ( msg_log, bufferSalidaLog ) ;
 

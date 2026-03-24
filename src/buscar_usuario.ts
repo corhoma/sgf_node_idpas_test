@@ -190,7 +190,7 @@ async function validar_usuario(usrval: string, usrvalpas: string, cconfig: LdapC
 
     const fq_usuario = "CN=" + usrval + "," + iniconf.BASE_DN;
 
-    console.log("FQ a validar: " + fq_usuario);
+    // console.log("FQ a validar: " + fq_usuario);
 
     try {
         await client1.bind(fq_usuario, usrvalpas);
@@ -227,4 +227,6 @@ async function validar_usuario(usrval: string, usrvalpas: string, cconfig: LdapC
 }
 
 module.exports = { validar_usuario,  buscar_usuario  }
+
+
 
