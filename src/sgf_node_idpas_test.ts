@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------- 
 // Corhoma - Informática e Ingeniería
 // Programa de test sgf_node_idpas_tst - test integracion con Signafile / AD    
-// v1.03 - 20260324
+// v1.04 - 20260324
 // ---------------------------------------------------------------------------------
 
 //import * as path from "node:path";
@@ -79,11 +79,15 @@ async function main(): Promise<void> {
     // defino la variabla para el codigo de salida
     let SalCode = 0 ;
     
+    const progname = "Sgf_node_idpas_test.Exe r0104 - (c)Corhoma SRL (2026)";
+
+    console.log ( `\n ${progname} \n ` ) ;
+        
     // alli es donde se agragaran los mensajes 
     const bufferSalidaLog: string[] = [];
 	
     // genero la cabecera archivo de log
-    escribir_header_buflog( bufferSalidaLog) ;
+    escribir_header_buflog( progname ,  bufferSalidaLog) ;
     
     // variable para guardar los mensajes de error de los catch 
     var msg_log = "" ;
@@ -312,7 +316,7 @@ let pass_usuario: string = "";
 	//console.log("// -----------------------");
 	//console.log("LDAP bindDN:", fq_usr_bind);
 	
-        escribir_buff_after_read_bb(usrbind, datos_ini.USUARIO, url ,bufferSalidaLog) ; 
+        escribir_buff_after_read_bb( usrbind ,usuario_a_validar, url, bufferSalidaLog) ; 
         }       
 
     } catch (error) {
@@ -382,7 +386,7 @@ let pass_usuario: string = "";
     // LLAMAR A LA FUNCION LDAP
     // -------------------------------------------
 	
-    const res: LdapResult = await buscar_usuario(usuario, config , bufferSalidaLog, logPath )  ;
+    const res: LdapResult = await buscar_usuario (usuario_a_validar, config , bufferSalidaLog, logPath )  ;
    
     escribir_proc_buflog ( config, res.grupos ,bufferSalidaLog) ;
 
