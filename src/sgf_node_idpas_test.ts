@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------- 
 // Corhoma - Informática e Ingeniería
 // Programa de test sgf_node_idpas_tst - test integracion con Signafile / AD    
-// v1.02 - 20260317
+// v1.03 - 20260324
 // ---------------------------------------------------------------------------------
 
 //import * as path from "node:path";
@@ -157,10 +157,10 @@ let pass_usuario: string = "";
 
     const rl = readline.createInterface({ input, output });
 
-    usuario_a_validar = await rl.question('Ingrese el usuario a validar: ');
+    usuario_a_validar = await rl.question('\n Ingrese el usuario a validar: ');
     //console.log('Ingresaste:', usuario);
 
-    pass_usuario = await rl.question('Ingrese la clave del usuario a validar: ');
+    pass_usuario = await rl.question('\n Ingrese la clave del usuario a validar: ');
     //console.log('Ingresaste:', pass);
 
     rl.close();
@@ -185,7 +185,7 @@ let pass_usuario: string = "";
     //  console.log("LDAP URL:", url);
 
     // ARMO EL FQN DEL USUARIO A VALIDAR 
-    const fq_usuario_a_validar: string = "CN=" + usuario_a_validar + "," + datos_ini.BASE_DN;
+    let fq_usuario_a_validar: string = "CN=" + usuario_a_validar + "," + datos_ini.BASE_DN;
 	
     // ----------------------------------------------
     // valido el usuario 
@@ -200,7 +200,7 @@ let pass_usuario: string = "";
 
     const resultado_validar = await validar_usuario( usuario_a_validar , pass_usuario, usr_val_config , bufferSalidaLog , logPath , datos_ini  ) ;
 
-    console.log ( "resultado validar:" + resultado_validar );
+    //console.log ( "resultado validar:" + resultado_validar );
 
 
 
