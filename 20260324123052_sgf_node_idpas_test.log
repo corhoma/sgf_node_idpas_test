@@ -1,0 +1,39 @@
+-----------------------------------------------------------------------------------------------
+   INICIO de la Ejecución del Sgf_node_idpas_test.Exe r0102 - (c)Corhoma SRL (2026)
+-----------------------------------------------------------------------------------------------
+
+            Workstation : TEODESKW11-02
+             User Logon : jorge
+             Date/Time :  2026-03-24 - 12:30:52
+           Program Path : D:\dev_node\sgf_node_idpas_test
+
+
+ Usuario validado correctamente
+-----------------------------------------------------------------------------------------------
+            Acces Account  : sgfusrbind
+                  Servidor : ldap://172.16.100.29:60389
+                 User Test : USRADMIN
+-----------------------------------------------------------------------------------------------
+Bind LDAP exitoso - Autenticado correctamente
+
+Grupos (15)
+-----------------------------------------------------------------------------------------------
+     Grupos : CN=Sw3AdmUsuarios,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3SupFirmas,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AbmFirmas,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3ConBALH,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AdmAuditoria,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AdmTablas,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AdmListados,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3SupLegCta,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AbmLegCta,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AdmLegCta,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3SupLegEnt,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AbmLegEnt,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AdmLegales,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AdmCentral,CN=CRHADLDS,DC=SIGNAFILE
+                    CN=Sw3AdmFirmas,CN=CRHADLDS,DC=SIGNAFILE
+
+-----------------------------------------------------------------------------------------------
+ FIN de la Ejecución del Sgf_node_idpas_test.Exe r0101
+-----------------------------------------------------------------------------------------------
