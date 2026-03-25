@@ -16,6 +16,7 @@ const { read_gen_bb } = require("./read_gen_bb");
 //import { read_ini,  } from "./read_ini.js";
 const { read_ini } = require("./read_ini");
 const readline = require('readline/promises');
+const { password } = require("@inquirer/prompts");
 //import { buscar_usuario } from "./buscar_usuario.js";
 const { buscar_usuario, validar_usuario } = require("./buscar_usuario");
 //import { Client, type SearchOptions } from "ldapts"; // Añadimos 'type'
@@ -106,8 +107,13 @@ async function main() {
     const rl = readline.createInterface({ input, output });
     usuario_a_validar = await rl.question('\n Ingrese el usuario a validar: ');
     //console.log('Ingresaste:', usuario);
-    pass_usuario = await rl.question('\n Ingrese la clave del usuario a validar: ');
+    //const usuario = await input({ message: "Usuario:" });
+    //poner ********
+    //pass_usuario = await rl.question('\n Ingrese la clave del usuario a validar: ');
     //console.log('Ingresaste:', pass);
+    pass_usuario = await password({ message: "\n Ingrese la clave del usuario a validar::", mask: "*" });
+    //console.log(`\nUsuario: ${usuario}`);
+    console.log(`Password recibido: ${"*".repeat(pass_usuario.length)}`);
     rl.close();
     //  console.log("LDAP URL:", url);
     // armo el string  para conectarme al servidor lDAP y 

@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@inquirer/prompts": "^8.3.2",
     "@types/ini": "^4.1.1",
     "@types/ldapjs": "^3.0.6",
     "@types/node": "^25.4.0",
@@ -54,19 +55,14 @@
     "which-typed-array": "^1.1.20"
   },
   "scripts": {
-     
-    "build": "tsc",                       
-    "build-exe": "tsc && pkg . --targets node18-win-x64 --output sgf_idpas_test.exe" ,  
-
+    "build": "tsc",
+    "build-exe": "tsc && pkg . --targets node18-win-x64 --output sgf_idpas_test.exe",
     "bundle": "ncc build dist/sgf_node_idpas_test.js -o build && rename build\\index.js sgf_node_idpas_test.js",
-	
-   	"package": "pkg build/sgf_node_idpas_test.js --targets node18-win-x64 --output sgf_node_idpas_test.exe",
-  
+    "package": "pkg build/sgf_node_idpas_test.js --targets node18-win-x64 --output sgf_node_idpas_test.exe",
     "all": "npm run build && npm run bundle && npm run package"
   },
   "pkg": {
     "scripts": "dist/*.js"
-	
   },
   "keywords": [],
   "author": "",

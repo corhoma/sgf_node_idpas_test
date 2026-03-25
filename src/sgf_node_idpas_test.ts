@@ -21,6 +21,8 @@ const { read_ini } = require("./read_ini");
 
 const readline = require('readline/promises');
 
+const { password } = require("@inquirer/prompts");
+
 //import { buscar_usuario } from "./buscar_usuario.js";
 const { buscar_usuario , validar_usuario } = require("./buscar_usuario");
 
@@ -165,8 +167,18 @@ let pass_usuario: string = "";
     usuario_a_validar = await rl.question('\n Ingrese el usuario a validar: ');
     //console.log('Ingresaste:', usuario);
 
-    pass_usuario = await rl.question('\n Ingrese la clave del usuario a validar: ');
+    //const usuario = await input({ message: "Usuario:" });
+
+    //poner ********
+    //pass_usuario = await rl.question('\n Ingrese la clave del usuario a validar: ');
+
     //console.log('Ingresaste:', pass);
+ 
+    pass_usuario = await password({ message: "\n Ingrese la clave del usuario a validar::", mask: "*" });
+
+    //console.log(`\nUsuario: ${usuario}`);
+    console.log(`Password recibido: ${"*".repeat(pass_usuario.length)}`);
+
 
     rl.close();
 
