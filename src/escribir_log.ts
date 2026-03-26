@@ -3,7 +3,7 @@
      *buffers y log sgf_node_idpas_tst
 	*         
 	* @author  Corhoma srl. (c) 2026 - convertido from php
-	* @version 1.02.  2026/03/17  revisado para github
+	* @version 1.05.  2026/03/26  revisado para github
 	* @since   node 18.xxxx
     * 
     * 
@@ -116,7 +116,7 @@ function escribir_proc_buflog(
         gruposLineas,
         "",
         SEP,
-        ` FIN de la Ejecución del Sgf_node_idpas_test.Exe r0101`,
+        ` FIN de la Ejecución del Sgf_node_idpas_test.Exe r0105`,
         SEP
     ].join(os.EOL);
 
@@ -137,7 +137,7 @@ function escribir_end_buflog(
     // ------------ armar el contenido -----------------------
     const trail_msg = [
         SEP,
-        ` FIN de la Ejecución del Sgf_node_idpas_test.Exe r0102`,
+        ` FIN de la Ejecución del Sgf_node_idpas_test.Exe r0105`,
         SEP,
         ""
     ].join(os.EOL);

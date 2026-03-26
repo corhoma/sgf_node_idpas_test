@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------- 
 // Corhoma - Informática e Ingeniería
 // Programa de test sgf_node_idpas_tst - test integracion con Signafile / AD    
-// v1.04 - 20260324
+// v1.05 - 20260326
 // ---------------------------------------------------------------------------------
 
 //import * as path from "node:path";
@@ -21,7 +21,7 @@ const { read_ini } = require("./read_ini");
 
 const readline = require('readline/promises');
 
-const { password } = require("@inquirer/prompts");
+const inquirer = require('inquirer');
 
 //import { buscar_usuario } from "./buscar_usuario.js";
 const { buscar_usuario , validar_usuario } = require("./buscar_usuario");
@@ -81,7 +81,7 @@ async function main(): Promise<void> {
     // defino la variabla para el codigo de salida
     let SalCode = 0 ;
     
-    const progname = "Sgf_node_idpas_test.Exe r0104 - (c)Corhoma SRL (2026)";
+    const progname = "Sgf_node_idpas_test.Exe r0105 - (c)Corhoma SRL (2026)";
 
     console.log ( `\n ${progname} \n ` ) ;
         
@@ -174,14 +174,20 @@ let pass_usuario: string = "";
 
     //console.log('Ingresaste:', pass);
  
-    pass_usuario = await password({ message: "\n Ingrese la clave del usuario a validar::", mask: "*" });
+    // pass_usuario = await password({ message: "\n Ingrese la clave del usuario a validar: ", mask: "*" });
 
-    //console.log(`\nUsuario: ${usuario}`);
-    console.log(`Password recibido: ${"*".repeat(pass_usuario.length)}`);
+    const respuesta_inquirer = await inquirer.prompt([
+          {
+            type: 'password',
+            name: 'pass_usuario',
+            message: '\n Ingrese la clave del usuario a validar:',
+            mask: '*'
+            }
+          ]);
 
+    pass_usuario = respuesta_inquirer.pass_usuario;
 
     rl.close();
-
 
     //  console.log("LDAP URL:", url);
     

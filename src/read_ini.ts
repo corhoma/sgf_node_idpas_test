@@ -2,7 +2,7 @@
 	* lectura del archivo INI para el programa Sgf_node_idpas_test
 	*         
 	* @author  Corhoma srl. (c) 2026 - 
-	* @version 1.02.  2026/03/17
+	* @version 1.05.  2026/03/17
 	* @since   node 18.xxxx
     * 
     * 

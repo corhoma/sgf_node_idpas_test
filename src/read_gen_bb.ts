@@ -5,7 +5,7 @@
     *         de la version php
 	*
 	* @author  Corhoma srl. (c) 2026 - convertido from php
-	* @version 1.02, 2026/03/17
+	* @version 1.02, 2026/03/26
 	* @since   node 18.xxxx
     * 
     * 

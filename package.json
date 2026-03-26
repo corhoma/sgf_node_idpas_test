@@ -1,11 +1,11 @@
 {
   "devDependencies": {
-    "@inquirer/prompts": "^8.3.2",
     "@types/ini": "^4.1.1",
     "@types/ldapjs": "^3.0.6",
     "@types/node": "^25.4.0",
     "@vercel/ncc": "^0.38.4",
     "ini": "^6.0.0",
+    "inquirer": "^8.2.7",
     "ldapjs": "^3.0.7",
     "path": "^0.12.7",
     "pkg": "^5.8.1",
@@ -68,5 +68,6 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "types": "./dist/sgf_node_idpas_test.d.ts",
   "description": ""
 }
