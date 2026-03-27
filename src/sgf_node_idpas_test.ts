@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------- 
 // Corhoma - Informática e Ingeniería
 // Programa de test sgf_node_idpas_tst - test integracion con Signafile / AD    
-// v1.05 - 20260326
+// v1.05 - 20260327
 // ---------------------------------------------------------------------------------
 
 //import * as path from "node:path";
@@ -266,7 +266,7 @@ let pass_usuario: string = "";
     // defino el buffer para acumular la salida a imprimir
     
     const BBpath: string = datos_ini.CUBB_PATH;
-    const file: string = "sgf_node_idpas_tst.HKF";
+    const file: string = "sgf_node_idpas_test.HKF";
 
     let usrbind: string = "";
     let usrbindpwd: string = "";
