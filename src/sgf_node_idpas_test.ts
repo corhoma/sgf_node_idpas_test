@@ -81,7 +81,7 @@ async function main(): Promise<void> {
     // defino la variabla para el codigo de salida
     let SalCode = 0 ;
     
-    const progname = "Sgf_node_idpas_test.Exe r0105 - (c)Corhoma SRL (2026)";
+    const progname = "Sgf_node_idpas_test.Exe r0106 - (c)Corhoma SRL (2026)";
 
     console.log ( `\n ${progname} \n ` ) ;
         
