@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------- 
 // Corhoma - Informática e Ingeniería
 // Programa de test sgf_node_idpas_tst - test integracion con Signafile / AD    
-// v1.05 - 20260327
+// v1.06 - 20260331
 // ---------------------------------------------------------------------------------
 
 //import * as path from "node:path";
@@ -130,8 +130,7 @@ async function main(): Promise<void> {
 	console.log("CUBB_PATH:", datos_ini.CUBB_PATH);
 	console.log("BASE_DN:", datos_ini.BASE_DN );
 	console.log("CERT_PATH:", datos_ini.CERT_PATH);
-	console.log("USUARIO:", datos_ini.USUARIO);
-    console.log("LOG_PATH:", datos_ini.LOG_FPATH);
+	console.log("LOG_PATH:", datos_ini.LOG_FPATH);
     */
 
     }
@@ -155,8 +154,8 @@ async function main(): Promise<void> {
    
    // const readline = require('readline');
 
-let usuario_a_validar: string = "";
-let pass_usuario: string = "";
+    let usuario_a_validar: string = "";
+    let pass_usuario: string = "";
 
     //const readline = require('readline/promises');
     
@@ -206,17 +205,26 @@ let pass_usuario: string = "";
     url = ldap_protocol + datos_ini.LDAP_SERVER + ":" +	datos_ini.LDAP_PORT;
 
     //  console.log("LDAP URL:", url);
+    let base_dn1 = datos_ini.BASE_DN ;
 
+    // construyo la forma canonica dC=xxxxxx,dc=vvvvv 
+    const baseDomName = base_dn1
+    .split(".")
+    .map(p => `DC=${p}`)
+    .join(",");
+       
     // ARMO EL FQN DEL USUARIO A VALIDAR 
-    let fq_usuario_a_validar: string = "CN=" + usuario_a_validar + "," + datos_ini.BASE_DN;
+    //let fq_usuario_a_validar: string = "CN=" + usuario_a_validar + "," + datos_ini.BASE_DN;
+	let fq_usuario_a_validar: string = "CN=" + usuario_a_validar + "," + baseDomName ;
 	
+
     // ----------------------------------------------
     // valido el usuario 
     // ----------------------------------------------
 
      const usr_val_config: LdapConfig = {
         url: url, 
-        baseDN: datos_ini.BASE_DN,
+        baseDN: baseDomName,
         bindDN: fq_usuario_a_validar,
         bindPassword: pass_usuario 
     };
@@ -224,8 +232,6 @@ let pass_usuario: string = "";
     const resultado_validar = await validar_usuario( usuario_a_validar , pass_usuario, usr_val_config , bufferSalidaLog , logPath , datos_ini  ) ;
 
     //console.log ( "resultado validar:" + resultado_validar );
-
-
 
     if ( resultado_validar != 0 ){
 
@@ -240,10 +246,6 @@ let pass_usuario: string = "";
         console.log ( msg_log );
           
        process.exit( SalCode )
-
-
-
-
 
     }else{
 
@@ -271,7 +273,19 @@ let pass_usuario: string = "";
     let usrbind: string = "";
     let usrbindpwd: string = "";
 
-   
+    // -----------------------
+    // LDAP protocolo 
+    // -----------------------
+
+    if ( datos_ini.LDAPS === "S" || datos_ini.LDAPS === "s" )  {
+           ldap_protocol = "ldaps://";   // se asumia sin segiridad aqui s eseteal con seguridad
+        }
+
+    // ej: ldap://172.16.100.29:60389
+    url = ldap_protocol + datos_ini.LDAP_SERVER + ":" +	datos_ini.LDAP_PORT;
+
+    //  console.log("LDAP URL:", url);
+
     try {
         
         //console.log("// -----------------------");
@@ -290,6 +304,8 @@ let pass_usuario: string = "";
         usrbind = resultado.usr;
         usrbindpwd = resultado.pwd;
         
+        let fq_usr_bind: string = '' ;
+
         SalCode = 300 ;
         if ( resultado.rc != 0 ){
 
@@ -306,35 +322,15 @@ let pass_usuario: string = "";
  
             // lei BB e INI OK 
 
-            // -----------------------
-    // LDAP protocolo 
-    // -----------------------
+            
 
-    /*
-    let ldap_protocol: string = "ldap://";
+            // ej: CN=sgfusrbind,CN=CRHADLDS,DC=SIGNAFILE
+            fq_usr_bind = usrbind + "@" + datos_ini.BASE_DN ;
 
-    if ( datos_ini.LDAPS === "S" || datos_ini.LDAPS === "s" )  {
-        ldap_protocol = "ldaps://";
-    }
-     */       
-
-
-    // ej: ldap://172.16.100.29:60389
-    url = ldap_protocol + datos_ini.LDAP_SERVER + ":" +	datos_ini.LDAP_PORT;
-
-    //  console.log("LDAP URL:", url);
-		
-    // -----------------------
-    // LDAP construyo DN de bind
-    // -----------------------
-
-    // ej: CN=sgfusrbind,CN=CRHADLDS,DC=SIGNAFILE
-    const fq_usr_bind: string = "CN=" + usrbind + "," + datos_ini.BASE_DN;
+        	//console.log("// -----------------------");
+	        //console.log("LDAP bindDN:", fq_usr_bind);
 	
-	//console.log("// -----------------------");
-	//console.log("LDAP bindDN:", fq_usr_bind);
-	
-        escribir_buff_after_read_bb( usrbind ,usuario_a_validar, url, bufferSalidaLog) ; 
+            escribir_buff_after_read_bb( usrbind ,usuario_a_validar, url, bufferSalidaLog) ; 
         }       
 
     } catch (error) {
@@ -352,26 +348,13 @@ let pass_usuario: string = "";
        process.exit( SalCode ) ;
 
     }
-
-	
-	// -----------------------
-    // LDAP protocolo 
-    // -----------------------
-
-
-
-    if ( datos_ini.LDAPS === "S" || datos_ini.LDAPS === "s" )  {
-        ldap_protocol = "ldaps://";   // se asumia sin segiridad aqui s eseteal con seguridad
-    }
-
-    //  console.log("LDAP URL:", url);
 	
     // -----------------------
-    // LDAP construyo DN de bind
+    // Construyo DN de bind
     // -----------------------
 
     // ej: CN=sgfusrbind,CN=CRHADLDS,DC=SIGNAFILE
-    const fq_usr_bind: string = "CN=" + usrbind + "," + datos_ini.BASE_DN;
+    const fq_usr_bind: string = usrbind + "@" + datos_ini.BASE_DN ;
 	
 	//console.log("// -----------------------");
 	//console.log("LDAP bindDN:", fq_usr_bind);
@@ -383,22 +366,14 @@ let pass_usuario: string = "";
     // ─── armar config con datos del .ini y caja negra ─────
     const config: LdapConfig = {
         url: url,
-        baseDN: datos_ini.BASE_DN,
+        baseDN: baseDomName,
         bindDN: fq_usr_bind,
         bindPassword: usrbindpwd
     };
 
     // console.log("LDAP CONFIG:", config);
-	
-	let usuario: string = "";
-	if ( datos_ini?.USUARIO)  {
-        usuario = datos_ini.USUARIO;
-    } else  {
-		usuario = 'USRADMIN';
-	}
-	
+		
     console.log("\n");   // linea en blanco 
-
 
     // -------------------------------------------
     // LLAMAR A LA FUNCION LDAP

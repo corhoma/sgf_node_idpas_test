@@ -2,7 +2,7 @@
 	* Busqueda de un usuario en LDAP y/O Active directory 
 	*         
 	* @author  Corhoma srl. (c) 2026 - convertido from php
-	* @version 1.05.  2026/03/26
+	* @version 1.06.  2026/03/31
     * 
 	* @since   node 18.xxxx
     * 
@@ -69,7 +69,7 @@ async function buscar_usuario(usuario: string, config: LdapConfig, flogBuff: str
         //       
         try {
 
-           await client.bind(config.bindDN, config.bindPassword);
+           await client.bind( config.bindDN, config.bindPassword);
 
            console.log( bind_msg_resultado );
 
@@ -92,7 +92,11 @@ async function buscar_usuario(usuario: string, config: LdapConfig, flogBuff: str
 
         escribir_buf_log ( bind_msg_resultado, flogBuff ) ;
         
-        const filtro: string = `(cn=${usuario})`
+        // const filtro: string = `(cn=${usuario})`
+
+        // filter: '(&(objectClass=user)(sAMAccountName=usuario))',
+
+        const filtro: string = `(&(objectClass=user)(sAMAccountName=${usuario}))`;
 
         const options: SearchOptions = {
             scope: "sub",
@@ -101,6 +105,9 @@ async function buscar_usuario(usuario: string, config: LdapConfig, flogBuff: str
         }
 
         console.log(`Buscando usuario: ${usuario}`)
+
+        console.log(`Buscando usuario: ${config.baseDN}`)
+
 
         const { searchEntries } = await client.search(config.baseDN, options)
 
@@ -180,18 +187,20 @@ async function buscar_usuario(usuario: string, config: LdapConfig, flogBuff: str
 }
 
 
-
 async function validar_usuario(usrval: string, usrvalpas: string, cconfig: LdapConfig , flogBuff: string[] , flogpath: string , iniconf: IniConfig  ): Promise <number> {
 
- let vu_ret = 0;
+    let vu_ret = 0;
 
     const client1 = new Client({
         url: cconfig.url
     });
 
-    const fq_usuario = "CN=" + usrval + "," + iniconf.BASE_DN;
 
-    // console.log("FQ a validar: " + fq_usuario);
+    console.log( cconfig.url );
+
+    const fq_usuario =  usrval + "@" + iniconf.BASE_DN;
+
+    console.log("FQ a validar: " + fq_usuario);
 
     try {
         await client1.bind(fq_usuario, usrvalpas);
